@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,8 +12,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../App";
 
 const Sidebar = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    fetch("https://limitless-tor-93225.herokuapp.com/SelectedService/", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email: loggedInUser.email }),
+    })
+      .then((res) => res.json())
+      .then((data) => setIsAdmin(data));
+  }, []);
+
   return (
     <div
       className="sidebar d-flex flex-column justify-content-between col-md-2 py-5 px-4"
@@ -21,10 +35,31 @@ const Sidebar = () => {
     >
       <ul className="list-unstyled">
         <li>
+          <Link to="/" className="text-white">
+            <h4>Solution Makers</h4>
+          </Link>
+        </li>
+        <li>
           <Link to="/dashboard" className="text-white">
             <FontAwesomeIcon icon={faGripHorizontal} /> <span>Dashboard</span>
           </Link>
         </li>
+        <li>
+          <Link to="/ReviewForm" className="text-white">
+            <FontAwesomeIcon icon={faGripHorizontal} /> <span>Review</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/AddService" className="text-white">
+            <FontAwesomeIcon icon={faGripHorizontal} /> <span>Add Service</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/AddAdmin" className="text-white">
+            <FontAwesomeIcon icon={faGripHorizontal} /> <span>Add Admin</span>
+          </Link>
+        </li>
+
         <li>
           <Link to="/" className="text-white">
             <FontAwesomeIcon icon={faHome} /> <span>Home</span>

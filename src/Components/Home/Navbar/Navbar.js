@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../App";
 
@@ -35,14 +36,14 @@ const Navbar = () => {
                 </a>
               </li>
               <li class="nav-item mx-3">
-                <a class="nav-link" href="/dashboard/selectedService">
-                  Admin
-                </a>
+                <Link class="nav-link" to="/dashboard/SelectedService">
+                  Dashboard
+                </Link>
               </li>
               <li class="nav-item mx-3">
-                <a class="nav-link" href="#">
-                  Blog
-                </a>
+                <Link class="nav-link" to="#">
+                  Admin
+                </Link>
               </li>
               <li class="nav-item mx-3">
                 <a class="nav-link" href="#">
@@ -53,7 +54,7 @@ const Navbar = () => {
           </div>
           <div>
             {loggedInUser.email ? (
-              <Link className="mr-2" to="/addProducts">
+              <Link className="mr-2" to="/login">
                 {loggedInUser.name}
               </Link>
             ) : (

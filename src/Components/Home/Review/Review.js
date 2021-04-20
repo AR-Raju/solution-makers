@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Review.css";
 import aliza from "../../../images/aliza.png";
 import ema from "../../../images/ema.png";
 import wilson from "../../../images/wilson.png";
+import ReviewData from "../ReviewData/ReviewData";
 
 const Review = () => {
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    fetch("https://limitless-tor-93225.herokuapp.com/ReviewForm")
+      .then((res) => res.json())
+      .then((data) => setReviews(data));
+  }, []);
+
   return (
     <div className="my-5">
       <div class="container-xl">
@@ -23,7 +32,11 @@ const Review = () => {
                 <li data-target="#myCarousel" data-slide-to="2"></li>
               </ol>
               {/* Wrapper for carousel items  */}
-              <div class="carousel-inner">
+              {reviews.map((review) => (
+                <ReviewData reviewData={review}></ReviewData>
+              ))}
+
+              {/* <div class="carousel-inner">
                 <div class="carousel-item active">
                   <div class="img-box">
                     <img src={wilson} alt="" />
@@ -69,7 +82,7 @@ const Review = () => {
                     <b>Michael Holz</b>, Seo Analyst
                   </p>
                 </div>
-              </div>
+              </div> */}
               {/* Carousel controls  */}
               <a
                 class="carousel-control-prev"

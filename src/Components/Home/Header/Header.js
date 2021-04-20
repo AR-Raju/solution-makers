@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import Navbar from "../Navbar/Navbar";
 import Services from "../Services/Services";

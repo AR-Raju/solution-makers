@@ -1,8 +1,12 @@
 import React from "react";
+import { useParams } from "react-router";
+
 import SelectedService from "../SelectedService/SelectedService";
 import Sidebar from "../Sidebar/Sidebar";
 
 const Dashboard = () => {
+  const { id } = useParams();
+  console.log(id);
   return (
     <div>
       <div className="container-fluid row bg-primary h-100">

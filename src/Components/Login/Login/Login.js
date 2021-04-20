@@ -2,8 +2,9 @@ import React, { useContext, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "../../../firebase.config";
-import { useHistory, useLocation } from "react-router";
+
 import { UserContext } from "../../../App";
+import { useHistory, useLocation } from "react-router";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
